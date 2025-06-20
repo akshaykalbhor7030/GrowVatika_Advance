@@ -16,7 +16,6 @@ type ExploreCardProps = {
 };
 
 export const ExploreCard: React.FC<ExploreCardProps> = ({ cardData }) => {
-  
   return (
     <div
       key={cardData.id}
@@ -67,7 +66,7 @@ export const ExploreCard: React.FC<ExploreCardProps> = ({ cardData }) => {
         </div>
 
         <div className="ml-[1.5rem] lg:mt-[1rem]">
-          <SiteButton buttonName={"Explore"} onClick={handleNavigation} />
+          <SiteButton buttonName={"Explore"}  />
         </div>
       </div>
     </div>
