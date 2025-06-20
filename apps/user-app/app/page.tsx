@@ -2,7 +2,8 @@ import { LandingPage } from "../components/landing";
 export default function Home() {
   return (
     <>
-      <LandingPage />
+    <div>Akshay Kalbhor</div>
+      {/* <LandingPage /> */}
     </>
   );
 }
