@@ -1,57 +1,51 @@
 "use client";
 
 import Image from "next/image";
-import { addtocartStore } from "@/store/addtocart";
+
+import { addToCartVisibilityStore } from "@/store/addToCartVisibility";
 
 export const Cart = () => {
-  const addToCartState = addtocartStore(
-    (state: any) => state.addToCartVisibility
+  const addToCartVisibility = addToCartVisibilityStore(
+    (state: any) => state.addToCartDropDownVisibility
   );
-
-  const addToCartStateUpdate = addtocartStore(
-    (state: any) => state.updateAddToCartStore
+  const updateAddToCartVisibility = addToCartVisibilityStore(
+    (state: any) => state.updateAddToCartDropDownVisibility
   );
-
-  const handleCloseAddToCart=()=>{
-    addToCartStateUpdate(false)
-  }
-
   const iconButton =
     "w-[2.5rem] h-[2.125rem] flex items-center justify-center bg-white rounded-sm flex-shrink-0";
 
-  if (addToCartState === true) {
+  const handleAddToCartVisibility = () => {
+    updateAddToCartVisibility(false);
+  };
+  if (addToCartVisibility === true) {
     return (
-      <div className="absolute top-0 left-0 z-10 flex justify-end bg-black  bg-opacity-25 w-full h-[100%]">
-        <div className="w-[29.375rem] h-max font-[Poppins] flex-shrink-0 rounded-l-[1.25rem] bg-white shadow-[0px_3.2px_32px_-0.8px_rgba(0,0,0,0.25)] flex flex-col">
+      <div className="absolute top-0 h-[100%] flex justify-end bg-black bg-opacity-10 w-full z-20">
+        <div className="w-[29.375rem] h-max font-[Poppins] flex-shrink-0 rounded-l-[1.25rem] bg-white shadow-[0px_3.2px_32px_-0.8px_rgba(0,0,0,0.25)] flex flex-col overflow-hidden my-[2rem]">
           {/* Cart Header */}
-          <div className="relative border-b border-gray-200 px-4 py-[3rem] h-[4.5rem] flex items-center justify-center">
-            <div className="flex items-center gap-2">
-              <h2 className="text-black text-[2rem] font-semibold leading-[130%]">
+          <div className="relative border-b border-gray-200 h-[4.5rem] flex items-center">
+            {/* Your Cart tiltle and count */}
+            <div className="w-[90%] h-[100%] flex justify-center items-center gap-[0.5rem]">
+              <h2 className="text-black text-[2rem] font-semibold ml-[4rem]">
                 Your Cart
               </h2>
-              <div className="relative w-6 h-6 flex-shrink-0 translate-y-[2px]">
-                <Image
-                  src="/assets/images/ExploreImages/greenCircleIcon.svg"
-                  alt="green circle"
-                  fill
-                  className="object-contain"
-                />
-                <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <span className="text-white text-[1.22688rem] font-medium capitalize">
-                    3
-                  </span>
-                </div>
-              </div>
+              {/* Count */}
+              <p className="w-[2rem] h-[2rem] rounded-full bg-[#56A430] flex justify-center items-center text-[#FFF] text-[1.22688rem] font-medium uppercase">
+                3
+              </p>
             </div>
+
+            {/* Cancle Icon */}
             <button
-              className="absolute top-3 right-3 w-[1.2rem] h-[1.2rem] cursor-pointer"
-              onClick={handleCloseAddToCart}
+              className="h-[100%] w-[10%] flex justify-center items-center"
+              onClick={handleAddToCartVisibility}
             >
-              <img
-                src="/assets/images/ExploreImages/cartXIcon.svg"
-                alt="Close"
-                className="w-full h-full object-contain"
-              />
+              <div className="w-[1.5rem] h-[1.5rem] cursor-pointer">
+                <img
+                  src="/assets/images/ExploreImages/cancleIcon.svg"
+                  alt="cancle"
+                  className="w-full h-full object-contain"
+                />
+              </div>
             </button>
           </div>
 
@@ -135,20 +129,27 @@ export const Cart = () => {
           </div>
 
           {/* Cart Footer */}
-          <div className="border-t border-gray-200 px-4 py-3 flex justify-center">
-            <div className="w-[26.125rem] px-[1.69rem] pb-[1.63rem] space-y-3">
+          <div className="w-[100%] border-t border-gray-200 flex justify-center">
+            <div className="w-[90%] pb-[1.63rem] flex flex-col gap-[0.5rem] pt-[0.5rem]">
+              {/* Discount Message */}
               <div className="flex items-center gap-2">
-                <Image
-                  src="/assets/images/ExploreImages/cartDiscountIcon.svg"
-                  alt="Discount"
-                  width={24}
-                  height={24}
-                  className="w-6 h-6 object-contain"
-                />
+                {/* Discount Icon */}
+                <div className="relative w-[1.5rem] h-[1.5rem] ">
+                  <Image
+                    src="/assets/images/ExploreImages/cartDiscountIcon.svg"
+                    alt="Discount"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+
                 <p className="text-[#697F75] text-[0.9375rem] font-normal leading-none">
                   Pay online and get extra 5% off
                 </p>
               </div>
+
+              {/* Total Price to be paid */}
+
               <div className="flex justify-between items-center">
                 <p className="text-[#171717] text-[1.25rem] font-semibold leading-[130%]">
                   Subtotal
@@ -157,6 +158,9 @@ export const Cart = () => {
                   ₹ 399
                 </p>
               </div>
+
+              {/* Checkout Button */}
+
               <button className="w-full h-[3.1875rem] bg-[#1A9AEF] rounded-[0.625rem] flex justify-center items-center">
                 <span className="text-white text-[1.22669rem] font-medium text-center">
                   Checkout

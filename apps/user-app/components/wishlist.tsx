@@ -1,12 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { wishListStore } from "@/store/wishList";
+
+import { wishListVisibilityStore } from "@/store/wishListVisibility";
 
 export const WishList = () => {
-  const wishListState = wishListStore((state: any) => state.wishListVisibility);
-  const updatewishListState = wishListStore(
-    (state: any) => state.updateWishListVisibility
+  const wishListVisibility = wishListVisibilityStore(
+    (state: any) => state.wishListDropDownVisibility
+  );
+
+  const updateWishListVisibility = wishListVisibilityStore(
+    (state: any) => state.updateWishListDropDownVisibility
   );
 
   const wishlistItems = [
@@ -54,21 +58,44 @@ export const WishList = () => {
     },
     // Add more items as needed
   ];
-
-  const handleCancleWishList = () => {
-    updatewishListState(false);
+  const handleWishListVisibility = () => {
+    updateWishListVisibility(false);
   };
-  if (wishListState === true) {
-    return (
-      <div className="absolute top-0 left-0 z-10 flex justify-center bg-black bg-opacity-25 w-full h-[100%]">
-        <div className="flex flex-col items-center w-[82.1875rem] rounded-[1.25rem] bg-[#fff] h-max  mx-[1rem]">
-          <div className="text-[2rem] text-[#000] font-semibold flex justify-center p-[1rem]">
-            Your Wishlist
-          </div>
-          <div className="w-[100%] border-[2px] bg-[#fff] h-max px-[2rem] flex flex-col items-center my-[1rem]">
-            {/* Items in your wishlist section */}
 
-            <div className="w-[87%] text-[1.25rem] font-medium flex justify-between border-[2px]">
+  if (wishListVisibility === true) {
+    return (
+      <div className="absolute top-0 z-20 w-[100%] h-[100%] bg-black/25 bg-opacity-10 flex justify-center">
+        <div className="h-[49.6875rem] w-[82.1875rem] font-[Poppins] bg-white rounded-[1.25rem] shadow-2xl mx-auto my-[2.75rem] border-[2px]">
+          {/* Your Wishlist header section */}
+          <div className="border-b pb-[1.81rem]">
+            <div className="flex items-center pt-[1.88rem]">
+              <div className="flex items-center ml-[34.81rem] gap-1">
+                <div className="relative h-[1.875rem] w-[1.875rem]">
+                  <Image
+                    src="/assets/images/WishListImages/wishListIcon.svg"
+                    alt="wishListIcon"
+                    fill
+                  />
+                </div>
+                <p className="text-[2rem] font-semibold">Your Wishlist</p>
+              </div>
+              {/* Cancel Icon */}
+              <button
+                className="relative h-[1.5rem] w-[1.5rem] ml-[28rem]"
+                onClick={handleWishListVisibility}
+              >
+                <Image
+                  src="/assets/images/WishListImages/cancelIcon.svg"
+                  alt="cancelIcon"
+                  fill
+                />
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-[2rem] ml-[4rem] mr-[4rem]">
+            {/* Items in your wishlist section */}
+            <div className="text-[1.25rem] font-medium flex justify-between">
               <div>Items in your wishlist</div>
               <button className="text-[#697F75]">Remove all</button>
             </div>
@@ -78,7 +105,7 @@ export const WishList = () => {
               {wishlistItems.map((item, index) => (
                 <div
                   key={index}
-                  className="h-[12.1875rem] w-[22rem]  bg-[#EDE7E4] rounded-[1.25rem] flex flex-col justify-center items-center gap-2"
+                  className="h-[12.1875rem] w-[22rem] mt-[1.75rem] bg-[#EDE7E4] rounded-[1.25rem] flex flex-col justify-center items-center gap-2"
                 >
                   <div className="h-[7.5625rem] flex gap-[1.5rem]">
                     <div className="relative h-[7rem] w-[7rem] border-[1.6px] border-white rounded-[1.25rem] overflow-hidden">
@@ -140,7 +167,7 @@ export const WishList = () => {
             </div>
 
             {/* Go to Your Cart section */}
-            <button className="h-[3.1875rem] w-[73.625rem] mt-4 bg-[#1A9AEF] rounded-[0.625rem] flex justify-center items-center border-[2px] border-red-500">
+            <button className="h-[3.1875rem] w-[73.625rem] mt-4 bg-[#1A9AEF] rounded-[0.625rem] flex justify-center items-center">
               <p className="text-[1.22669rem] text-white">Go to Your Cart</p>
             </button>
           </div>
