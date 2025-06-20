@@ -22,7 +22,6 @@ export const SellerDashboardNavBar = () => {
                   : "help center"}
       </div>
       <div className="flex gap-10">
-
         <button className="flex justify-center items-center h-[4.0625rem] w-[4.0625rem] rounded-[1.25rem] border-[1.5px] border-[#CBD0D3]">
           <div className="relative h-[24px] w-[24px] ">
             <Image
